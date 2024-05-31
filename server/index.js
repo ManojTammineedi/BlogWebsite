@@ -143,7 +143,4 @@ app.get("/post/:id", async (req, res) => {
 });
 
 app.listen(4000);
-// blog
-// Ygjvi90fA8iDn9QA
-// mongodb+srv://blog:Ygjvi90fA8iDn9QA@cluster0.iueljuu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-// sEYyO2LfKbiiKsEb`
+
