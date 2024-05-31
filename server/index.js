@@ -21,6 +21,10 @@ mongoose.connect(
   "mongodb+srv://manojtammineedi780:sEYyO2LfKbiiKsEb@cluster0.anfhtil.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 );
 
+app.get("/",(req,res)=>{
+  res.json("hello")
+})
+
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
 
