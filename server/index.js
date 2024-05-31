@@ -12,18 +12,16 @@ const uploadMiddleware = multer({ dest: "uploads/" });
 const fs = require("fs");
 const salt = bcrypt.genSaltSync(10);
 const secret = "sadakjdhkadd";
-
+require("dotenv").config();
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
-mongoose.connect(
-  "mongodb+srv://manojtammineedi780:sEYyO2LfKbiiKsEb@cluster0.anfhtil.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-);
+mongoose.connect(process.env.MONGO_URL);
 
-app.get("/",(req,res)=>{
-  res.json("hello")
-})
+app.get("/", (req, res) => {
+  res.json("hello");
+});
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
