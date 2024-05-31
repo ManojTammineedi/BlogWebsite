@@ -7,6 +7,26 @@ a {
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: #222;
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      hsla(100, 60%, 30%, 0.2) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 40% 30%,
+      hsla(150, 60%, 30%, 0.2) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 60% 40%,
+      hsla(250, 60%, 30%, 0.2) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 50%,
+      hsla(340, 60%, 30%, 0.2) 0%,
+      transparent 30%
+    );
 }
 img {
   max-width: 100%;
@@ -177,4 +197,15 @@ a svg {
 div.edit-and-delete {
   display: inline-flex;
   gap: 20px;
+}
+.delete-btn {
+  background-color: red;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-bottom: 10px;
 }

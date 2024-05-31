@@ -126,29 +126,12 @@ app.get("/post", async (req, res) => {
 });
 app.delete("/post/:id", async (req, res) => {
   const { id } = req.params;
-  const { token } = req.cookies;
-
-  jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    try {
-      const postDoc = await Post.findById(id);
-
-      // Check if the authenticated user is the author of the post
-      if (postDoc.author.toString() !== info.id) {
-        return res.status(403).json({ message: "Forbidden" });
-      }
-
-      // Delete the post from the database
-      await postDoc.remove();
-
-      res.json({ message: "Post deleted successfully" });
-    } catch (error) {
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  });
+  try {
+    const postDoc = await Post.findByIdAndDelete(id);
+    res.json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 app.get("/post/:id", async (req, res) => {
@@ -161,4 +144,4 @@ app.listen(4000);
 // blog
 // Ygjvi90fA8iDn9QA
 // mongodb+srv://blog:Ygjvi90fA8iDn9QA@cluster0.iueljuu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-// sEYyO2LfKbiiKsEb
+// sEYyO2LfKbiiKsEb`
