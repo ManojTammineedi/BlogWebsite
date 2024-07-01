@@ -14,7 +14,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = "sadakjdhkadd";
 require("dotenv").config();
 
-app.use(cors({ credentials: true, origin: "https://blogwebsite-eta-ten.vercel.app" }));
+app.use(cors({ credentials: true, origin: "https://blogwebsite-ph2vdlupz-manojtammineedis-projects.vercel.app" }));
 
 app.use(express.json());
 app.use(cookieParser());
