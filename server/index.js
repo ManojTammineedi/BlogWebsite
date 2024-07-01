@@ -13,7 +13,12 @@ const fs = require("fs");
 const salt = bcrypt.genSaltSync(10);
 const secret = "sadakjdhkadd";
 require("dotenv").config();
-app.use(cors({ credentials: true, origin: "https://blogwebsite-eta-ten.vercel.app" }));
+app.use(cors({
+  origin: 'https://blogwebsite-eta-ten.vercel.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
