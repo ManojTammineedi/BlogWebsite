@@ -6,6 +6,7 @@ export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
     fetch("https://blogwebsite-w8ot.onrender.com/profile", {
+      method: "GET",
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
