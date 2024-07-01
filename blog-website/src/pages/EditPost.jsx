@@ -12,7 +12,7 @@ export default function EditPost() {
 
   const [redirect, setRedirect] = useState(false);
   useEffect(() => {
-    fetch("https://blogwebsite-w8ot.onrender.com/post/" + id).then((response) => {
+    fetch("https://blogwebsite-w8ot.onrender.com:4000/post/" + id).then((response) => {
       response.json().then((postInfo) => {
         setTitle(postInfo.title);
         setContent(postInfo.content);
