@@ -5,7 +5,7 @@ import { UserContext } from "./UserContext";
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
-    fetch("https://blogwebsite-w8ot.onrender.com:4000/profile", {
+    fetch("https://blogwebsite-w8ot.onrender.com/profile", {
       credentials: "include",
       method: "GET",
     }).then((response) => {
