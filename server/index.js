@@ -59,10 +59,14 @@ app.post("/login", async (req, res) => {
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
   if (!token) {
+    console.log("Token not provided");
     return res.status(401).json({ error: "Token not provided" });
   }
-  jwt.verify(token, secret, {}, (err, info) => {
-    if (err) return res.status(401).json({ error: "Invalid token" });
+  jwt.verify(token, secret, (err, info) => {
+    if (err) {
+      console.log("Invalid token", err);
+      return res.status(401).json({ error: "Invalid token" });
+    }
     res.json(info);
   });
 });
