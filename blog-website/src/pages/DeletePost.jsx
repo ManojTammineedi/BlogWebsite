@@ -15,7 +15,7 @@ export default function DeletePost() {
     const data = new FormData();
     data.set("id", id);
     console.log(id);
-    const response = await fetch(`http://localhost:4000/post/${id}`, {
+    const response = await fetch(`https://blogwebsite-w8ot.onrender.com/post/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {
