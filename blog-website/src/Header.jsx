@@ -16,7 +16,7 @@ export default function Header() {
   }, []);
 
   function logout() {
-    fetch("https://blogwebsite-w8ot.onrender.com:4000/logout", {
+    fetch("https://blogwebsite-w8ot.onrender.com/logout", {
       credentials: "include",
       method: "POST",
     });
