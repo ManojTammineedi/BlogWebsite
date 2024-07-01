@@ -67,7 +67,7 @@ export default function Postpage() {
         )}
       </div>
       <div className="image">
-        <img src={`http://localhost:4000/${postInfo.cover}`} />
+        <img src={`https://blogwebsite-w8ot.onrender.com/${postInfo.cover}`} />
       </div>
 
       <div
