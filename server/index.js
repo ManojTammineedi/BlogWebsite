@@ -13,6 +13,7 @@ const fs = require("fs");
 const salt = bcrypt.genSaltSync(10);
 const secret = "sadakjdhkadd";
 require("dotenv").config();
+
 app.use(cors({
   origin: 'https://blogwebsite-eta-ten.vercel.app',
   credentials: true,
@@ -30,11 +31,9 @@ app.get("/", (req, res) => {
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
-
   try {
     const userDoc = await User.create({
       username,
-
       password: bcrypt.hashSync(password, salt),
     });
     res.json(userDoc);
@@ -45,7 +44,6 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
   const userDoc = await User.findOne({ username });
   const passOk = bcrypt.compareSync(password, userDoc.password);
 
@@ -61,10 +59,14 @@ app.post("/login", async (req, res) => {
     res.status(400).json("wrong credentials");
   }
 });
+
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
+  if (!token) {
+    return res.status(401).json({ error: "Token not provided" });
+  }
   jwt.verify(token, secret, {}, (err, info) => {
-    if (err) throw err;
+    if (err) return res.status(401).json({ error: "Invalid token" });
     res.json(info);
   });
 });
@@ -80,8 +82,11 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   const newPath = path + "." + ext;
   fs.renameSync(path, newPath);
   const { token } = req.cookies;
+  if (!token) {
+    return res.status(401).json({ error: "Token not provided" });
+  }
   jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
+    if (err) return res.status(401).json({ error: "Invalid token" });
     const { title, summary, content } = req.body;
     const postDoc = await Post.create({
       title,
@@ -91,7 +96,6 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
       author: info.id,
     });
     res.json(postDoc);
-    // res.json(info);
   });
 });
 
@@ -105,8 +109,11 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
     fs.renameSync(path, newPath);
   }
   const { token } = req.cookies;
+  if (!token) {
+    return res.status(401).json({ error: "Token not provided" });
+  }
   jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
+    if (err) return res.status(401).json({ error: "Invalid token" });
     const { id, title, summary, content } = req.body;
     const postDoc = await Post.findById(id);
     const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
@@ -131,6 +138,7 @@ app.get("/post", async (req, res) => {
       .limit(20)
   );
 });
+
 app.delete("/post/:id", async (req, res) => {
   const { id } = req.params;
   try {
